@@ -9,7 +9,7 @@ import (
 func saikoro() int {
 	t := time.Now().UnixNano()
     rand.Seed(t)
-    s := rand.Intn(6)
+    s := rand.Intn(6) + 1
     println(s)
 	return s
 }
