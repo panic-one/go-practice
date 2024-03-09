@@ -1,10 +1,10 @@
 package main
 
-func kisu(number int) bool {
+func gusu(number int) bool {
     if number%2 == 0 {
-		return false
+		return true
 	} else {
-        return true
+        return false
     }
 }
 
@@ -13,7 +13,7 @@ func main() {
 	for i := 1; i <= 100; i++ {
 		
 		print(i)
-		if kisu(i) {
+		if gusu(i) {
 			println("-偶数")
 		} else {
             println("-奇数")
