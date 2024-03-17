@@ -42,6 +42,8 @@ func main() {
 		return
 	}
 	fmt.Println(p1, p2, p3, p4, p5)
+	scoreList := []GameScore{*p1, *p2, *p3, *p4, *p5}
+	syukei(scoreList)
 }
 
 func NewGameScore(name string, score int, number int) (*GameScore, error) {
@@ -54,4 +56,12 @@ func NewGameScore(name string, score int, number int) (*GameScore, error) {
 	} else {
 		return nil, fmt.Errorf("Invalid score: %s", strconv.Itoa(score))
 	}
+}
+
+func syukei(scoreList []GameScore) int{
+	sum := 0
+	for _, score := range scoreList{
+		sum += score.Score
+	}
+	return sum
 }
