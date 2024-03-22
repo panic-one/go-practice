@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"flag"
 )
-var number = flag.String("n",0, "行番号")
+var number = flag.Int("n","1", "行番号")
 var n int 
 func init() {
 	flag.IntVar(&n, "n", 1, "行番号")
@@ -19,7 +20,7 @@ func main() {
 		defer sf.Close
 	}
 
-	
+
 	flag.Parse()
-	fmt.Println(strings.Repeat_(*msg, n))
+	fmt.Println(strings.Repeat_(*number, n))
 }
