@@ -8,6 +8,7 @@ import (
 )
 
 var n = flag.Bool("n", false, "行番号をつけるかどうか")
+var linenumber int = 1
 
 func main() {
 	flag.Parse()
@@ -28,6 +29,8 @@ func readLines(fp *os.File) {
 	for scanner.Scan() {
 		//1行分を出力する
 		fmt.Println(scanner.Text())
+		fmt.Printf("%5d: %s\n", linenumber, scanner.Text())
+		linenumber ++
 	}
 	// まとめてエラー処理をする
 	if err := scanner.Err(); err != nil {
