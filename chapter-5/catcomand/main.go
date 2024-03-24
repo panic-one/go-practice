@@ -18,19 +18,22 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "ファイル読み込みに失敗しました:", err)
 		}
-		readLines(sf)
+		readLines(sf, n)
 		defer sf.Close()
 	}
 }
 
-func readLines(fp *os.File) {
+func readLines(fp *os.File, n *bool) {
 	scanner := bufio.NewScanner(fp)
 	// 1行ずつ読み込んで繰り返す
 	for scanner.Scan() {
 		//1行分を出力する
-		fmt.Println(scanner.Text())
-		fmt.Printf("%5d: %s\n", linenumber, scanner.Text())
-		linenumber ++
+		if *n {
+			fmt.Printf("%4d: %s\n", linenumber, scanner.Text())
+			linenumber++
+		} else {
+			fmt.Println(scanner.Text())
+		}
 	}
 	// まとめてエラー処理をする
 	if err := scanner.Err(); err != nil {
