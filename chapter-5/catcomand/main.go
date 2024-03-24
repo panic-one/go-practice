@@ -12,7 +12,7 @@ var linenumber int = 1
 
 func main() {
 	flag.Parse()
-	filepath := os.Args[1:]
+	filepath := flag.Args()
 	for _, a := range filepath {
 		sf, err := os.Open(a)
 		if err != nil {
