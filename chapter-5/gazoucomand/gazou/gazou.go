@@ -1,10 +1,9 @@
 package gazou
 
 import (
-	"flag"
 	"fmt"
 	"image"
-	_ "image/jpeg"
+	"image/jpeg"
 	"image/png"
 	"os"
 	"path/filepath"
@@ -16,23 +15,19 @@ func NewGazou() *Gazou {
 	return &Gazou{}
 }
 
-var inputFormat = flag.String("i", "jpg", "変換前の画像の形式の指定")
-var outputFormat = flag.String("o", "png", "変換後の画像の形式の指定")
-
-func (c *Gazou) ConvertJPGToPNG(dir string, ipf string, opf string) error {
+func (c *Gazou) Convert(dir string, ipf string, opf string) error {
 	return filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return fmt.Errorf("ディレクトリ内を走査するときにエラーが発生しました: %v", err)
 		}
-		if !info.IsDir() && filepath.Ext(path) == "."+*inputFormat {
-			return henkan(path, *outputFormat)
+		if !info.IsDir() && filepath.Ext(path) == ipf {
+			return henkan(path, ipf, opf)
 		}
 		return nil
 	})
 }
 
-func henkan(filePath, outputFormat string) error {
-	flag.Parse()
+func henkan(filePath, inputFormat string, outputFormat string) error {
 	sf, err := os.Open(filePath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "ファイル読み込みに失敗しました", err)
@@ -52,9 +47,17 @@ func henkan(filePath, outputFormat string) error {
 
 	defer outFile.Close()
 
-	if err := png.Encode(outFile, img); err != nil {
-		fmt.Errorf("Encodeに失敗しました: %v", err)
+	if inputFormat == "jpeg" {
+		if err := png.Encode(outFile, img); err != nil {
+			fmt.Errorf("Encodeに失敗しました: %v", err)
+		}
+	} else if inputFormat == "png" {
+		if err := jpeg.Encode(outFile, img, nil); err != nil {
+			fmt.Errorf("Encodeに失敗しました: %v", err)
+		}
+	} else {
+		fmt.Errorf("invalid file type")
 	}
 
-	return nil
+	return err
 }
