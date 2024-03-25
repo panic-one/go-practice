@@ -11,18 +11,19 @@ var n = flag.Bool("n", false, "行番号をつけるかどうか")
 
 func main() {
 	flag.Parse()
+	linenumber := 1
 	filepath := flag.Args()
 	for _, a := range filepath {
 		sf, err := os.Open(a)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "ファイル読み込みに失敗しました:", err)
 		}
-		readLines(sf, n, 1)
+		linenumber = readLines(sf, n, linenumber)
 		defer sf.Close()
 	}
 }
 
-func readLines(fp *os.File, n *bool, s int) {
+func readLines(fp *os.File, n *bool, s int) int {
 	scanner := bufio.NewScanner(fp)
 	// 1行ずつ読み込んで繰り返す
 	for scanner.Scan() {
@@ -38,4 +39,5 @@ func readLines(fp *os.File, n *bool, s int) {
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "読み込みに失敗しました:", err)
 	}
+	return s
 }
