@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
 	"fmt"
 )
 
@@ -10,7 +10,7 @@ type Stringer interface {
 
 type Person struct {
 	Name string
-	Age int
+	Age  int
 }
 
 func (p Person) String() string {
@@ -19,7 +19,7 @@ func (p Person) String() string {
 
 type Home struct {
 	Address string
-	Year int
+	Year    int
 }
 
 func (h Home) String() string {
@@ -27,7 +27,7 @@ func (h Home) String() string {
 }
 
 type Pet struct {
-	Name string
+	Name    string
 	Species string
 }
 
@@ -39,7 +39,7 @@ func A(s Stringer) {
 	switch a := s.(type) {
 	case Person:
 		fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
-    case Home:
+	case Home:
 		fmt.Sprintf("Address: %s, Year: %d", h.Address, h.Year)
 	case Pet:
 		fmt.Sprintf("Name: %s, Species: %s", p.Name, p.Species)
@@ -47,5 +47,5 @@ func A(s Stringer) {
 }
 
 func main() {
-	
+
 }
