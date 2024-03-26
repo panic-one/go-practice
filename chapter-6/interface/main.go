@@ -38,14 +38,20 @@ func (p Pet) String() string {
 func A(s Stringer) {
 	switch a := s.(type) {
 	case Person:
-		fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+		fmt.Println(a.String())
 	case Home:
-		fmt.Sprintf("Address: %s, Year: %d", h.Address, h.Year)
+		fmt.Println(a.String())
 	case Pet:
-		fmt.Sprintf("Name: %s, Species: %s", p.Name, p.Species)
+		fmt.Println(a.String())
 	}
 }
 
 func main() {
+	person := Person{Name: "Yukiru", Age: 19}
+	home := Home{Address: "112223aaa", Year: 2000}
+	pet := Pet{Name: "aaasss", Species: "Dog"}
 
+	A(person)
+	A(home)
+	A(pet)
 }
