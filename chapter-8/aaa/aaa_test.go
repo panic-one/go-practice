@@ -1,17 +1,9 @@
 package aaa
 
-import(
+import (
 	"fmt"
 	"testing"
 )
-
-func gusu(s int) bool {
-	if s%2 == 0 {
-		return true
-	} else {
-		return false
-	}
-}
 
 func TestFlagParser(t *testing.T) {
 	var flagtests = []struct {
