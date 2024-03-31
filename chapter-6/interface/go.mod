@@ -1,0 +1,1 @@
+module go-practice/chapter-6/interface
