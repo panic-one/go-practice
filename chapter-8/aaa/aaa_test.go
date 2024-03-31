@@ -5,16 +5,15 @@ import (
 	"testing"
 )
 
-func TestFlagParser(t *testing.T) {
-	var flagtests = []struct {
+func TestGusu(t *testing.T) {
+	var testcase = []struct {
 		in  int
 		out bool
 	}{
-		{2, true}, {3, false}, {128, true},
-		{1351, false}, {1958, true},
+		{2, true}, {3, false}, {0, true}, {1472897, false}, {-327, false},
 	}
 
-	for _, tt := range flagtests {
+	for _, tt := range testcase {
 		t.Run(fmt.Sprintf("%d", tt.in), func(t *testing.T) {
 			result := gusu(tt.in)
 			if result != tt.out {
