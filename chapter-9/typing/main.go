@@ -37,7 +37,7 @@ func main() {
 	select {
         case <-t1: // 制限時間が来た時の処理
             fmt.Println("Finished!" + " Your score is " + strconv.Itoa(n) + " points! Good job:)")
-            break words()
+            break 
         case x := <-ch_rcv: // お題と入力した値の比較処理
             if x == q {
                 fmt.Println("OK!")
