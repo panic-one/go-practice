@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-var temp = template.Must(template.New("").
-	Parse("<html><body>{{Name}}さんの運勢は「<b>{{Omikuji}}</b>」です</body></html>"))
+var temp = template.Must(template.New("a").
+	Parse("<html><body>{{.Name}}さんの運勢は「<b>{{.Omikuji}}</b>」です</body></html>"))
 
 type Result struct {
 	Name    string

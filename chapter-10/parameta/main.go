@@ -23,7 +23,7 @@ func omikuji() string {
 }
 
 func omikujiHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, omikuji(), r.FormValue("p"))
+	fmt.Fprintf(w, "%sさんの運勢は%sです。\n", r.FormValue("p"), omikuji())
 }
 
 func main() {
